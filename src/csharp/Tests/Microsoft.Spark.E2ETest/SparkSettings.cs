@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using Xunit.Sdk;
 
 namespace Microsoft.Spark.E2ETest
 {
@@ -25,7 +24,7 @@ namespace Microsoft.Spark.E2ETest
             SparkHome = Environment.GetEnvironmentVariable("SPARK_HOME");
             if (SparkHome == null)
             {
-                throw new NullException("SPARK_HOME environment variable is not set.");
+                throw new Exception("SPARK_HOME environment variable is not set.");
             }
         }
 
