@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0</TargetFrameworks>
+		<RootNamespace>Microsoft.Spark.Extensions.DotNet.Interactive.UnitTest</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Moq" Version="4.10.0" />
+		<PackageReference Include="Microsoft.DotNet.Interactive" Version="1.0.0-beta.20480.3" />
+		<PackageReference Include="xunit" Version="2.5.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Microsoft.Spark.Extensions.DotNet.Interactive\Microsoft.Spark.Extensions.DotNet.Interactive.csproj" />
+		<ProjectReference Include="..\..\..\Microsoft.Spark\Microsoft.Spark.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\..\..\Tests\Microsoft.Spark.UnitTest\TestUtils\TemporaryDirectory.cs" />
+	</ItemGroup>
+
+</Project>

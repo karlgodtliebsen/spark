@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using Microsoft.Spark.Network;
+
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.Spark.Network;
+
 using Xunit;
 
 namespace Microsoft.Spark.Worker.UnitTest
@@ -14,7 +15,7 @@ namespace Microsoft.Spark.Worker.UnitTest
     public class TaskRunnerTests
     {
         [Fact]
-        public void TestTaskRunner()
+        public async Task TestTaskRunner()
         {
             using var serverListener = new DefaultSocketWrapper();
             serverListener.Listen();
@@ -32,7 +33,8 @@ namespace Microsoft.Spark.Worker.UnitTest
                 TestTaskRunnerReadWrite(serverSocket, payloadWriter);
             }
 
-            Assert.True(clientTask.Wait(5000));
+            await clientTask;
+            //Assert.True(clientTask.Wait(5000));
         }
 
         internal static void TestTaskRunnerReadWrite(

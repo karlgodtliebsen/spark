@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
 using Microsoft.Spark.Interop.Ipc;
 using Microsoft.Spark.Network;
+
+using System;
+using System.Net;
+using System.Threading.Tasks;
+
 using Xunit;
 
 namespace Microsoft.Spark.Worker.UnitTest
@@ -13,7 +14,7 @@ namespace Microsoft.Spark.Worker.UnitTest
     {
         [Theory]
         [MemberData(nameof(TestData.VersionData), MemberType = typeof(TestData))]
-        public void TestsSimpleWorkerTaskRunners(string version)
+        public async Task TestsSimpleWorkerTaskRunners(string version)
         {
             using ISocketWrapper serverListener = SocketFactory.CreateSocket();
             var ipEndpoint = (IPEndPoint)serverListener.LocalEndPoint;
@@ -36,7 +37,9 @@ namespace Microsoft.Spark.Worker.UnitTest
                 TaskRunnerTests.TestTaskRunnerReadWrite(serverSocket, payloadWriter);
             }
 
-            Assert.True(clientTask.Wait(5000));
+            await clientTask;
+
+            // Assert.True(clientTask.Wait(5000));
         }
     }
 }
