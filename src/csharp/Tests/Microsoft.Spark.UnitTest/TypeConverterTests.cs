@@ -5,7 +5,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.Spark.Utils;
+
 using Xunit;
 
 namespace Microsoft.Spark.UnitTest
@@ -135,7 +137,7 @@ namespace Microsoft.Spark.UnitTest
             foreach (KeyValuePair<int, Dictionary<int, int>> kvp in expected)
             {
                 var innerHashtable = new Hashtable();
-                foreach(KeyValuePair<int, int> innerKvp in kvp.Value)
+                foreach (KeyValuePair<int, int> innerKvp in kvp.Value)
                 {
                     innerHashtable[innerKvp.Key] = innerKvp.Value;
                 }
@@ -170,8 +172,7 @@ namespace Microsoft.Spark.UnitTest
                     hashtable[kvp.Key] = arrayList;
                 }
 
-                Dictionary<int, int[]> actual =
-                    TypeConverter.ConvertTo<Dictionary<int, int[]>>(hashtable);
+                Dictionary<int, int[]> actual = TypeConverter.ConvertTo<Dictionary<int, int[]>>(hashtable);
                 Assert.Equal(expected, actual);
             }
             {
@@ -179,7 +180,6 @@ namespace Microsoft.Spark.UnitTest
                     .Range(0, 10)
                     .Select(i => Enumerable.Range(i, 10).ToDictionary(j => j, j => j * j))
                     .ToArray();
-                
                 var arrayList = new ArrayList();
                 for (int i = 0; i < expected.Length; ++i)
                 {
@@ -191,10 +191,11 @@ namespace Microsoft.Spark.UnitTest
 
                     arrayList.Add(hashtable);
                 }
-
-                Dictionary<int, int>[] actual =
-                    TypeConverter.ConvertTo<Dictionary<int, int>[]>(arrayList);
-                Assert.Equal(expected, actual);
+                var actual = TypeConverter.ConvertTo<Dictionary<int, int>[]>(arrayList);
+                for (int i = 0; i < expected.Length; i++)
+                {
+                    Assert.Equal(expected[i], actual[i]);
+                }
             }
         }
     }

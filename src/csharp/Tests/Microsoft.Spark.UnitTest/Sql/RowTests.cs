@@ -6,14 +6,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using Microsoft.Spark.Interop.Ipc;
 using Microsoft.Spark.Network;
 using Microsoft.Spark.Sql;
 using Microsoft.Spark.Sql.Types;
 using Microsoft.Spark.UnitTest.TestUtils;
 using Microsoft.Spark.Utils;
+
 using Moq;
+
 using Razorvine.Pickle;
+
 using Xunit;
 
 namespace Microsoft.Spark.UnitTest
@@ -120,6 +124,8 @@ namespace Microsoft.Spark.UnitTest
             stream.Seek(0, SeekOrigin.Begin);
 
             // Set up the mock to return memory stream to which pickled data is written.
+
+
             var socket = new Mock<ISocketWrapper>();
             socket.Setup(m => m.InputStream).Returns(stream);
             socket.Setup(m => m.OutputStream).Returns(stream);
