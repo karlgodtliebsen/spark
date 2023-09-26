@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Microsoft.Spark.Worker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_WORKER_SPARK_VERSION": "3"
+      }
+    }
+  }
+}
